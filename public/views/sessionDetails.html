@@ -1,0 +1,31 @@
+<ion-view title="{{header.title()}}">
+ <ion-content padding="true" ng-class="{'has-loading': header.isLoading}">
+	<h4>Session Details</h4>
+	 <div>{{errorMsg}}</div>
+ 		<button class="button button-icon ion-arrow-left-c" ng-click="goBack()">Back</button>
+ 
+<div class="item item-text-wrap">
+<b>sessionID</b> {{session.sessionID}}
+</div>
+<!--  
+<div class="item item-text-wrap">
+<b>currentWizardID</b> {{session.currentWizardID}}
+</div>
+-->
+<div class="item item-text-wrap">
+<b>productBase</b> {{session.productBase}}
+</div>
+<div class="item item-text-wrap">
+<b>createdAt</b> {{session.createdAt}}
+</div>
+<div class="item item-text-wrap">
+<b>isUpgrade</b> {{session.isUpgrade}}
+</div>
+
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+       </ion-content>
+      </ion-view>
+
+	

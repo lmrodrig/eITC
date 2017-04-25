@@ -1,0 +1,195 @@
+				<ion-item ng-if="!supportedControl(item.control.type)" class="item item-divider item-text-wrap">
+  					Note: Type {{item.control.type}} is not supported yet!!!
+  					componentName: {{item.control.componentName}}<br>
+  				</ion-item>
+				<div ng-if="item.control.type == 'Boolean_Control'" ng-disabled="!item.control.ctrl_enabled_B" ng-controller="booleanSelectController" ng-init="init(item.control)">
+        			<ion-toggle class="item item-stable item-text-wrap toggle-calm"
+        						ng-disabled="!item.control.ctrl_enabled_B"
+        						ng-model="updateRequest.ctrl_value_B" 
+                    			ng-checked="updateRequest.ctrl_value_B"
+                    			ng-change="updateControl()">
+          					{{item.description}}
+        			</ion-toggle>
+				</div>  				
+				<div ng-if="item.control.type == 'String_Control'" ng-disabled="!item.control.ctrl_enabled_B || item.layout.readOnly" ng-controller="stringSelectController" ng-init="init(item.control)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+					</ion-item>
+ 					<form ng-submit="updateControl()" ng-if="!item.layout.multiLine && !item.layout.readOnly && item.control.ctrl_enabled_B">
+						<label class="item item-input">
+  						<!-- 	<span class="input-label item-text-wrap">{{control.description}}</span> -->
+ 							<input ng-if="!item.layout.multiLine" type="text" ng-disabled="!item.control.ctrl_enabled_B"
+ 												ng-model="updateRequest.ctrl_value_S" 
+  												ng-change="changeControl()"
+  												ng-click="updatePreviousControl(item.control.id)">
+							</input>
+							<textarea ng-if="item.layout.multiLine" rows="30" ng-disabled="!item.control.ctrl_enabled_B"
+ 												ng-model="updateRequest.ctrl_value_S" 
+  												ng-change="changeControl()"
+  												ng-click="updatePreviousControl(item.control.id)">
+							</textarea>
+						</label>
+					</form>
+							<ion-item ng-if="item.layout.multiLine || item.layout.readOnly || !item.control.ctrl_enabled_B" class="item item-text-wrap">
+							{{updateRequest.ctrl_value_S}}
+							</ion-item>
+				</div>  
+				<div ng-if="item.control.type == 'Model_Controlled_Ranged_Float_Control'" ng-disabled="!item.control.ctrl_enabled_B || item.layout.readOnly" ng-controller="rangeFloatController" ng-init="init(item.control)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+					</ion-item>
+ 					<form ng-submit="updateControl()" ng-if="!item.layout.readOnly">
+						<label class="item item-input">
+ 							<input ng-if="!item.layout.multiLine" type="number" ng-disabled="!item.control.ctrl_enabled_B || item.layout.readOnly"
+ 												ng-model="updateRequest.ctrl_value_F" min="0"
+  												ng-change="changeControl()"
+  												ng-click="updatePreviousControl(item.control.id)">
+							</input>
+						</label>
+					</form>
+				</div>  
+				<div ng-if="item.control.type == 'Date_Control'" ng-disabled="!control.ctrl_enabled_B" ng-controller="dateSelectController" ng-init="init(item.control)">
+  					<form name="dateForm" ng-submit="updateControl()">
+					<label class="item item-input">
+   						<input type="date" ng-disabled="!item.control.ctrl_enabled_B" ng-model="date" name="dateInput"
+       							placeholder="yyyy-MM-dd" ng-change="updateControl()" required />
+   						<div role="alert">
+     						<span class="error" ng-show="dateForm.dateInput.$error.required">Required!</span>
+     						<span class="error" ng-show="dateForm.dateInput.$error.date">Not a valid date!</span>
+    					</div>
+    				</label>
+    				</form>
+ 				</div>  
+			
+				<div ng-if="item.control.type == 'Singlevalued_Component_Control' && item.control.data.length > 0" ng-disabled="!control.ctrl_enabled_B" ng-controller="singleSelectController" ng-init="init(item)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+  						{{item.description}}
+					</ion-item>
+               			<div ng-if="(item.control.data.length < 3 || item.layout.type != 'COMBOBOX') && item.control.data[0].description.length == 1" ng-repeat="comp in item.control.data">
+                    		<ion-radio class="item-text-wrap" ng-disabled="!item.control.ctrl_enabled_B" ng-model="updateRequest.ctrl_value_C" value="{{comp.id}}" name="{{item.control.id}}" ng-change="updateControl()">{{description($index)}}</ion-radio>
+                    	</div>
+                    <ion-item ng-if="item.control.data[0].description.length > 1 && item.layout.type != 'COMBOBOX'">
+                    <table>
+        				
+        				<thead>				  	
+        	 
+        				<tr>
+    						<th ng-repeat="col in item.layout.additionalMetaData" ng-if="col.isVisible" style="text-align: left;">{{col.label}}</th>
+    					</tr>
+  						 
+  						 
+  						</thead>
+  				
+  						<tbody>
+  						<tr ng-repeat="comp in item.control.data" ng-class="{'selected':comp.id == updateRequest.ctrl_value_C}" ng-click="selectRow(comp.id)">
+    						<td ng-repeat="description in comp.description track by $index" ng-if="item.layout.additionalMetaData[$index].isVisible">{{description}}</td>
+    					</tr>
+  						</tbody>
+					</table>
+					</ion-item>
+                    		
+                		
+                	<div ng-if="item.control.data.length > 2 && item.layout.type == 'COMBOBOX'" ng-include src="'views/overlay-select.html'"></div>
+                		
+ 				</div>  				
+				<div ng-if="item.control.type == 'Singlevalued_Instance_Control' && 'item.control.data.length > 0'" ng-disabled="!item.control.ctrl_enabled_B" ng-controller="singleSelectInstanceController" ng-init="init(item.control)">
+  					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+  						{{item.description}}
+					</ion-item>
+               			<div ng-if="item.control.data[0].description.length == 1" ng-repeat="comp in control.data">
+                    		<ion-radio class="item-text-wrap" ng-disabled="!item.control.ctrl_enabled_B" ng-model="updateRequest.ctrl_value_CI" value="{{comp.id}}" name="{{item.control.id}}" ng-change="updateControl()">{{description($index)}}</ion-radio>
+                		</div>
+                	<ion-item ng-if="item.control.data[0].description.length > 1">
+                    <table>
+        				
+        				<thead>				  	
+        	 
+        				<tr>
+    						<th ng-repeat="col in item.layout.additionalMetaData" ng-if="col.isVisible" style="text-align: left;">{{col.label}}</th>
+    					</tr>
+  						 
+  						 
+  						</thead>
+  				
+  						<tbody>
+  						<tr ng-repeat="comp in item.control.data" ng-class="{'selected':comp.id == updateRequest.ctrl_value_CI}" ng-click="selectRow(comp.id)">
+    						<td ng-repeat="description in comp.description track by $index" ng-if="item.layout.additionalMetaData[$index].isVisible">{{description}}</td>
+    					</tr>
+  						</tbody>
+					</table>
+					</ion-item>
+                		
+ 				</div>  				
+				<div ng-if="item.control.type == 'Multivalued_Component_Control' && 'item.control.data.length > 0'" ng-disabled="!item.control.ctrl_enabled_B" ng-controller="multiSelectController" ng-init="init(item.control)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+  						{{item.description}}
+					</ion-item>
+                			<div ng-repeat="comp in item.control.data">
+        					<ion-checkbox 	class="item-text-wrap"
+        									ng-disabled="!item.control.ctrl_enabled_B"
+        									ng-model="comp.selected" 
+        									ng-checked="selected({{comp.id}})"
+                      						ng-change="updateControl({{comp.id}})">
+          									{{comp.description[0]}}
+       	 					</ion-checkbox>
+               			</div>
+   				</div>  
+   				<!-- 				
+				<div ng-if="item.control.type == 'Table_Component_Control' && 'item.control.data.length > 0'" ng-disabled="!item.control.ctrl_enabled_B" ng-controller="tableSelectController" ng-init="init(item.control)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+  						{{item.description}}
+					</ion-item>
+               			<div ng-repeat="comp in item.control.data">
+							<form ng-submit="updateControl($index)">
+							 	<label class="item item-input">
+							  		<span class="poc-table-input-label item-text-wrap">{{compDescription($index)}}</span>
+ 									<input type="number" ng-model="comp.quantity" min="0"
+ 												ng-disabled="!item.control.ctrl_enabled_B"
+ 												ng-change="changeControl($index)"
+ 												ng-click="updatePreviousControl(item.control.id, comp.id)">	 
+									</input>
+								</label>
+							</form>               			
+						</div>
+					</div>
+					 -->
+					<div ng-if="item.control.type == 'Table_Component_Control' && 'item.control.data.length > 0'" ng-disabled="!item.control.ctrl_enabled_B" ng-controller="tableSelectController" ng-init="init(item.control)">
+ 					<ion-item ng-if="!item.hasLabel" class="item item-divider item-seperator item-text-wrap">
+  						{{item.description}}
+					</ion-item>
+					<ion-item>
+					<table>
+						<col style="width:95%">
+        				<col style="width:5%">	
+        				<thead>				  	
+        				<tr>
+    						<th style = "text-align: left;">{{item.control.metaData.columnNames[0]}}</th>
+    						<th style = "text-align: left;">{{item.control.metaData.columnNames[1]}}</th>
+  						</tr>
+  						</thead>
+  						<tbody>
+  						<tr ng-repeat="comp in item.control.data">
+    						<td>{{compDescription($index)}}</td>
+    						<td>
+          						<form ng-submit="updateControl($index)">
+									<input type="number" ng-model="comp.quantity" min="0"
+ 												ng-disabled="!item.control.ctrl_enabled_B"
+ 												ng-change="changeControl($index)"
+ 												ng-click="updatePreviousControl(item.control.id, comp.id)">	 
+									</input>
+								</form>  
+     						</td>
+  						</tr>
+  						</tbody>
+					</table>
+					</ion-item>
+					
+ 			    </div>
+				
+				<div ng-if="item.control.type == 'Command_Control' && !footerControl(item.control.componentName) && item.control.componentName  != 'ibm_interim_price_button'" ng-disabled="!item.control.ctrl_enabled_B">
+ 					<ion-item class="item item-text-wrap">
+ 						<a class="button button-positive" ng-disabled="!item.control.ctrl_enabled_B" ng-href="#" ng-click="selectCommandControl2(item.control)" ng-bind="item.description" class="margin-right-xs"></a>
+  					</ion-item>
+   				</div>  				
+					
+
+
+

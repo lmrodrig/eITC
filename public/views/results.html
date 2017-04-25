@@ -1,0 +1,25 @@
+ 
+<ion-view  title="{{header.title()}}">
+	<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+	</ion-content>
+</ion-view>
+
+<ion-tabs class="tabs-icon-top tabs-secondary" ng-init="refreshViews()">
+ 	<ion-tab title="Edit" icon="ion-compose" href="#config/results/edit">
+	 	<ion-nav-view name="edit-tab"></ion-nav-view>		
+ 	</ion-tab>
+	<ion-tab title="Add Product" icon="ion-plus" href="#config/results/catalog">
+ 		<ion-nav-view name="catalog-tab"></ion-nav-view>
+ 	</ion-tab>
+	<ion-tab title="Messages" icon="ion-information-circled" href="#config/results/messages">
+ 		<ion-nav-view name="messages-tab"></ion-nav-view>
+ 	</ion-tab>
+	<ion-tab title="Summary" icon="ion-clipboard" href="#config/results/summary">
+ 		<ion-nav-view name="summary-tab"></ion-nav-view>
+ 	</ion-tab>
+	<ion-tab title="Diagram" icon="ion-network" href="#config/results/diagram">
+ 		<ion-nav-view name="diagram-tab"></ion-nav-view>
+ 	</ion-tab>
+ </ion-tabs>
+
+

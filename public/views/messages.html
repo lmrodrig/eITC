@@ -1,0 +1,35 @@
+		<ion-view> 
+			<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+				<h4>Messages</h4>
+				<!-- <ion-list class="item-button-right">
+					<ion-item ng-repeat="message in messages" class="item" >
+  						{{message.description}}
+ 					</ion-item>   
+				</ion-list> -->
+				<ion-list ng-repeat="message in messages |orderObjectBy:'severityNumber'">
+						<ion-item class="item-text-wrap">
+							<div>
+								<div ng-if="message.severityNumber == 4" class="alert alert-info" role="alert" style="padding:5px;margin-bottom:5px;">
+									<img ng-src="images/{{message.severityNumber}}.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+								</div>
+		  						<div ng-if="message.severityNumber == 3" class="alert alert-warning" role="alert" style="padding:5px;margin-bottom:5px;">
+		  							<img ng-src="images/{{message.severityNumber}}.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+		  						</div>
+		  						<div ng-if="message.severityNumber == 2" class="alert alert-warning" role="alert" style="padding:5px;margin-bottom:5px;">
+		  							<img ng-src="images/{{message.severityNumber}}.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+		  						</div>
+		  						<div ng-if="message.severityNumber == 1" class="alert alert-danger" role="alert" style="padding:5px;margin-bottom:5px;">
+		  							<img ng-src="images/{{message.severityNumber}}.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+		  						</div>
+							</div>
+							<div class="inline action" ng-repeat="action in message.actions | filter : filteredAction">
+								<a ng-click="selectMessageAction(message,action)" ng-bind="action.description" class="margin-right-xs" style="display: inline-block;text-decoration:none"></a>
+							</div> 
+						</ion-item>
+ 					</ion-list> 
+			
+				<div ng-show="header.showJSON()">
+					<br><br>JSON<br><textarea rows="200" cols="100">{{messageJson}}</textarea>
+				</div>
+			</ion-content> 
+		</ion-view>	

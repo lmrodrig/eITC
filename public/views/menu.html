@@ -1,0 +1,63 @@
+
+<ion-side-menus>
+  	<div class="bar bar-loading bar-positive" ng-if="header.isLoading()">
+      	Loading...
+   	</div>
+   	<div id="disablingDiv" ng-show="header.isLoading()"></div>
+	<ion-side-menu-content>
+	
+		<ion-nav-bar class="bar-dark">
+ <!-- 
+			<ion-nav-back-button ng-show="hasBack()" class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button>
+-->
+            <ion-nav-buttons  side="left">
+           		<button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+             	<button ng-show="hasBack()" class="button" ng-click="goBack()">Back</button>
+             	<img ng-if="header.status() < 5" ng-src="images/{{header.status()}}.ico" style="width:18px;height:18px;margin: 0 auto"></img>
+           	</ion-nav-buttons>
+
+          	<ion-nav-buttons  side="right">
+<!--             	<button ng-show="isConfigurable()" class="button button-icon ion-gear-a" ng-click="tabSelect('config/selectFlowControl/Finish_Control')"></button> -->
+<!--            	<button ng-show="isConfigurable()" class="button" ng-click="tabSelect('config/selectFlowControl/Finish_Control')">Done</button> -->
+	            	<button class="ion-close-round" ng-click="exit()"></button>
+          	</ion-nav-buttons>
+		</ion-nav-bar>
+
+		<ion-nav-view animation="none" name="menuContent">
+
+		</ion-nav-view>
+			<ion-footer-bar ng-if="footer.showFooter()" class="bar-dark">
+				<div ng-repeat="control in footer.getScope().customizeData.flowControls">
+				<!-- 	<a class="button button-clear" ng-disabled="!control.ctrl_enabled_B" ng-href="#" ng-click="footer.getScope().selectFlowControl($index)" ng-bind="control.displayName"></a> -->
+             		<button ng-disabled="!control.ctrl_enabled_B" class="button margin-right-xs" ng-click="footer.getScope().selectFlowControl($index)">{{control.displayName}}</button>
+				</div>
+ 				<div ng-repeat="control in footer.getScope().customizeData.controls">
+             		<button ng-if="footer.getScope().footerControl(control.componentName)" ng-disabled="!control.ctrl_enabled_B" class="button margin-right-xs" ng-click="footer.getScope().selectCommandControl($index)">{{control.displayName}}</button>
+				</div>
+           </ion-footer-bar>
+	</ion-side-menu-content> 
+        
+	<ion-side-menu side="left">
+		<ion-header-bar class="bar-stable">
+			<h1 class="title">More</h1>
+		</ion-header-bar>
+		<ion-content class="dark-bg">
+            <ul class="list">
+              <a href="#/config/startOver" ng-show="hasSession()" ng-click="tabSelect('moreTab')" class="item item-icon-right">New Session<i class="icon ion-chevron-right icon-accessory"></i></a>
+              <a href="#/config/trace" ng-show="hasSession()" ng-click="tabSelect('moreTab')" class="item item-icon-right">Trace<i class="icon ion-chevron-right icon-accessory"></i></a>
+              <a href="#/config/sessionDetails" ng-show="hasSession()" ng-click="tabSelect('moreTab')" class="item item-icon-right">Session Details<i class="icon ion-chevron-right icon-accessory"></i></a>
+              <a href="#" ng-show="hasSession()" ng-click="saveConfigurationSession()" class="item item-icon-right">Save configuration session<i class="icon ion-chevron-right icon-accessory"></i></a>
+              <a download="sessiondata.ser" ng-click="hideLink('moreTab')" ng-show="isDownloadReady" ng-href="{{ url }}" class="item item-icon-right"><i class="royal">Download session state</i></a>
+              <a href="#" ng-show="hasSession()" ng-click="generateCFR()" class="item item-icon-right">Create CFR<i class="icon ion-chevron-right icon-accessory"></i></a>
+              <a download="poc_cfreport.cfr" ng-click="hideLink('moreTab')" ng-show="isCFRDownloadReady" ng-href="{{ url }}" class="item item-icon-right"><i class="royal">Download CFR</i></a>
+            
+              
+            </ul>
+	   	</ion-content>
+	</ion-side-menu>
+        
+</ion-side-menus>
+ 
+
+

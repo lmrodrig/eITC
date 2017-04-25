@@ -1,0 +1,22 @@
+		<ion-view> 
+			<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+				
+					<div style="border:1px solid black;"">
+						<h5>Diagram objects</h5>
+						
+						 <treecontrol class="tree-light" tree-model="parts" on-selection="showSelected(node,selected)"
+						 	  options="treeOptions">
+						     {{node.label}}, [{{node.shape}} ({{node.width}}|{{node.height}}|{{node.xpos}}|{{node.ypos}})]
+						 </treecontrol>
+					</div>
+					<h5>Diagram</h5>
+					<!-- <img ng-src="{{url}}" width="100%" height="100%"/> -->
+					<!-- <div ng-bind-html="svgData"></div> -->
+					
+					<div ng-bind-html="svgData" id="container"  style="width:1000; height: 1000; border:1px solid black; " >
+	
+					<button id="move">Move</button>
+					</div>
+				
+			</ion-content> 
+		</ion-view> 

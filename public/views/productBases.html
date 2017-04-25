@@ -1,0 +1,21 @@
+<ion-view title="{{header.title()}}">
+
+ <ion-content ng-class="{'has-loading': header.isLoading}" padding="true">
+   	<div>{{errorMsg}}</div>
+<h4>Product Bases</h4>
+Select a product base from the avalible product bases to create a new session
+
+ 
+<ion-list class="item-button-right">
+	<ion-item ng-repeat="productBase in productBases" class="item item-icon-right" href="#/config/createSession/{{productBase.id}}">
+  		{{ productBase.name}}
+	 	<i class="icon ion-chevron-right icon-accessory"></i>
+  	</ion-item>   
+</ion-list>
+
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+
+        </ion-content>
+      </ion-view>

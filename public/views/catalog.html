@@ -1,0 +1,38 @@
+		<ion-view> 
+			<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+				<h4>Product Catalog</h4>
+				<div class="ab-nav breadcrumb">
+				    <div class='inline' ng-repeat="breadcrumb in breadcrumbs track by $index"">
+				      <button ng-disabled="$last" ng-click="jumpToPartsList($index,{{breadcrumb.id}})" ng-bind="breadcrumb.description" class="button button-clear button-positive">{{breadcrumb.description}}</button>
+				    </div>
+		  		</div>
+				<!--  <button ng-show="hasProductListParent()" class="button button-icon ion-arrow-left-c" ng-click="collapsePartsList()">Back</button>-->
+				<ion-list class="item-button-right">
+					<div ng-repeat="part in displayList" >
+						<ion-item ng-if="part.type=='Resource'" class="item item-icon-right item-text-wrap" ng-click="expandPartsList($index)">
+ 							{{part.description}}
+	 						<i class="icon ion-chevron-right icon-accessory" ></i>
+	 					</ion-item> 
+						<ion-item ng-if="part.type=='Component'" class="item item-icon-right" ng-click="addPart($index)">
+ 							{{part.description}}
+	 						{{part.partNumber}}
+	 						<i class="icon ion-plus icon-accessory"></i>
+	 					</ion-item> 
+					</div>
+   					<!--   
+					<ion-item ng-repeat="part in displayList" ng-show="part.type=='Component'" class="item item-icon-right" ng-click="addPart($index)">
+  						{{part.description}}
+	 					{{part.partNumber}}
+	 					<i class="icon ion-plus icon-accessory"></i>
+  					</ion-item>   
+  					--> 
+				</ion-list>
+				<br>
+				<div>{{statusMsg}}</div>
+				
+				
+				<div ng-show="header.showJSON()">
+					<br><br>JSON<br><textarea rows="200" cols="100">{{partsListJson}}</textarea>
+				</div>
+			</ion-content> 
+		</ion-view> 

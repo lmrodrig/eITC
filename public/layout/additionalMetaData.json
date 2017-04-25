@@ -1,0 +1,4 @@
+{
+	"sq_summary_control" : [{"label" : "FC", "isVisible" : false}, {"label" : "Feature", "isVisible" : true}, {"label" : "Auto-Added", "isVisible" : true}, {"label" : "Total", "isVisible" : true}],
+	"swn_mtm_iteration_list_control" : [{"label" : "Sort", "isVisible" : false}, {"label" : "MTM", "isVisible" : true}, {"label" : "Description", "isVisible" : true}, {"label" : "Category", "isVisible" : true}]
+}

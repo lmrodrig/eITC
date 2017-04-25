@@ -1,0 +1,39 @@
+		<ion-view> 
+			<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+				<h4>Configured Products and Settings</h4>
+ 				<div class="ab-nav breadcrumb"> 
+ 				    <div class='inline' ng-repeat="breadcrumb in wizBreadcrumbs track by $index"> 
+ 				      <button ng-disabled="$last" ng-click="jumpToWizardList($index,{{breadcrumb.id}})" ng-bind="breadcrumb.description" class="button button-clear button-positive">{{breadcrumb.description}}</button> 
+ 				    </div> 
+ 		  		</div> 
+				
+ 				<div ng-repeat="wizard in currentChildren | filter : filterWizard" > 
+ 					<ion-list> 
+ 						<ion-item class="item item-icon-right item-text-wrap" ng-click=selectWizard(wizard)> 
+   							<p ng-if="wizard.quantity == 0">
+   								{{wizard.description}}
+   							</p>
+   							<p ng-if="wizard.quantity > 0">
+   								{{wizard.description}}  (quantity: {{wizard.quantity}})
+   							</p>
+   							<div class="inline action" ng-repeat="action in wizard.actions | filter : filteredAction"> 
+ 								<a ng-click="selectAction(action)" ng-bind="action.description" class="margin-right-xs" style="display: inline-block;text-decoration:none"></a> 
+ 							</div>  
+ 	 						<i class="icon ion-chevron-right icon-accessory" ng-show="wizard.children.length > 0"></i> 
+ <!--   	 						
+ 								 <ion-list> 
+ 								<div class="inline breadcrumb" ng-repeat="action in wizard.actions | filter : filteredAction"> 
+ 									<a ng-click="selectAction(action)" ng-bind="action.description" class="margin-right-xs" style="display: inline-block;text-decoration:none"></a> 
+ 								</div>  
+    							</ion-list> 
+-->
+    						</ion-item>   
+					</ion-list> 
+  				</div> 
+				
+				
+				<div ng-show="header.showJSON()">
+					<br><br>JSON<br><textarea rows="200" cols="100">{{wizardListJson}}</textarea>
+				</div>
+			</ion-content> 
+		</ion-view>

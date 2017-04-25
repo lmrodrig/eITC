@@ -1,0 +1,22 @@
+		<ion-view> 
+			<ion-content class="padding" ng-class="{'has-loading': header.isLoading()}">
+				<h4>Summary</h4>
+			
+				<ion-list class="item-button-right">
+					<ion-item ng-repeat="quote in quotes" class="item item-text-wrap" >
+  						{{quote.quantity}} - {{quote.partNumber}}  {{quote.description}}
+  						<ion-list class="item-button-right">
+							<ion-item ng-repeat="quote2 in quotes.children" class="item" >
+  								{{quote2.quantity}} - {{quote2.partNumber}}  {{quote2.description}}
+ 							</ion-item>   
+				</ion-list>
+  						
+ 					</ion-item>   
+				</ion-list>
+
+				
+				<div ng-show="header.showJSON()">
+					<br><br>JSON<br><textarea rows="200" cols="100">{{summaryJson}}</textarea>
+				</div>
+			</ion-content> 
+		</ion-view> 

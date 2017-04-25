@@ -1,0 +1,14 @@
+            <ion-view class="overlay-select-items modal">
+              <ion-header-bar class="poc">
+
+                <button ng-click="hideItems()" class="button">Close</button>
+
+                <h1 class="title">{{item.label}}</h1>
+
+               </ion-header-bar>
+              <ion-content>
+               			<div ng-repeat="comp in control.data">
+                    		<ion-radio class="item-text-wrap" ng-disabled="!control.ctrl_enabled_B" ng-model="updateRequest.ctrl_value_C" value="{{comp.id}}" name="{{control.id}}" ng-change="updateControl()">{{description($index)}}</ion-radio>
+                		</div>
+              </ion-content>
+            </ion-view>

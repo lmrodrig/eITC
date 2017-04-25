@@ -1,0 +1,197 @@
+
+
+<ion-view>
+
+
+	<ion-content ng-class="{'has-loading': header.isLoading}">
+
+<!--	
+	<ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+    <button class="button button-icon ion-arrow-left-c" ng-click="goBack()">Done</button>
+  </div>
+  <h3 class="title">{{currentPanelData.label}}</h3>
+</ion-header-bar>
+    -->
+    <div>
+		<h4 class="title">{{currentPanelData.label}}</h4>
+<!-- 		<button class="button button-icon ion-arrow-left-c" ng-click="goBack()">Done</button> -->
+		<div>{{errorMsg}}</div>
+	</div>
+ 		<ion-list class="item-button-right">
+			<div ng-repeat="control in currentPanelData.controls" >
+				<ion-item ng-if="!supportedControl(control.type) && control.visible_B && control.ctrl_id_F > 0" class="item item-divider item-text-wrap">
+  					Note: Type {{control.type}} is not supported yet!!!
+  					componentName: {{control.componentName}}<br>
+  				</ion-item>
+				<div ng-if="control.type == 'Boolean_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="booleanSelectController" ng-init="init($index)">
+        			<ion-toggle class="item item-stable item-text-wrap"
+        						ng-model="updateRequest.ctrl_value_B" 
+                    			ng-checked="updateRequest.ctrl_value_B"
+                    			ng-change="updateControl()">
+          					{{control.displayName}}
+        			</ion-toggle>
+				</div>  				
+				<div ng-if="control.type == 'String_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="stringSelectController" ng-init="init($index)">
+ 					<ion-item class="item item-divider item-text-wrap">
+ 						{{control.displayName}}
+  					</ion-item>
+ 					<form ng-submit="updateControl()">
+						<label class="item item-input">
+  						<!-- 	<span class="input-label item-text-wrap">{{control.description}}</span> -->
+ 							<input type="text" 	ng-model="updateRequest.ctrl_value_S" 
+ 												ng-minlength="1"
+  												ng-maxlength="30"
+  												ng-blur="updateControl()">
+							</input>
+						</label>
+					</form>
+				</div>  
+				<div ng-if="control.type == 'Date_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="dateSelectController" ng-init="init($index)">
+ 					<ion-item class="item item-divider item-text-wrap">
+ 						{{control.displayName}}
+  					</ion-item>
+  					<form name="dateForm" ng-submit="updateControl()">
+					<label class="item item-input">
+   						<input type="date" ng-model="date" name="dateInput"
+       							placeholder="yyyy-MM-dd" ng-change="updateControl()" required />
+   						<div role="alert">
+     						<span class="error" ng-show="dateForm.dateInput.$error.required">Required!</span>
+     						<span class="error" ng-show="dateForm.dateInput.$error.date">Not a valid date!</span>
+    					</div>
+    				</label>
+    				</form>
+ 				</div>  
+			
+				<div ng-if="control.type == 'Singlevalued_Component_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="singleSelectController" ng-init="init($index)">
+ 					<ion-item class="item item-divider item-text-wrap">
+ 						{{control.displayName}}
+  					</ion-item>
+               			<div ng-repeat="comp in control.data">
+                    		<ion-radio class="item-text-wrap" ng-model="updateRequest.ctrl_value_C" value="{{comp.id}}" name="{{control.id}}" ng-change="updateControl()">{{comp.description[0]}}</ion-radio>
+                		</div>
+ 				</div>  				
+				<div ng-if="control.type == 'Multivalued_Component_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="multiSelectController" ng-init="init($index)">
+ 					<ion-item class="item item-divider item-text-wrap">
+ 						{{control.displayName}}
+  					</ion-item>
+               			<div ng-repeat="comp in control.data">
+        					<ion-checkbox 	class="item-text-wrap"
+        									ng-model="comp.selected" 
+        									ng-checked="selected({{comp.id}})"
+                      						ng-change="updateControl({{comp.id}})">
+          									{{comp.description[0]}}
+       	 					</ion-checkbox>
+               			</div>
+   				</div>  				
+				<div ng-if="control.type == 'Table_Component_Control' && control.visible_B && control.ctrl_id_F > 0" ng-disabled="!control.ctrl_enabled_B" data-ng-controller="tableSelectController" ng-init="init($index)">
+  					<ion-item class="item item-divider item-text-wrap">
+ 						{{control.displayName}}
+  					</ion-item>
+               		
+               			<div ng-repeat="comp in control.data">
+							<form ng-submit="updateControl($index)">
+							 	<label class="item item-input">
+							  		<span class="poc-table-input-label item-text-wrap">{{compDescription($index)}}</span>
+ 									<input type="number" ng-model="comp.quantity" 
+ 												ng-change="change($index)"
+  												ng-blur="updateControl($index)">
+ 												 
+									</input>
+								</label>
+<!-- 								<label class="item item-input item-text-wrap"> -->
+<!-- 								<table> -->
+<!-- 								<col width="%70"> -->
+<!-- 								<col width="%30"> -->
+<!-- 								<tr> -->
+<!-- 								<td> -->
+<!-- 									<span class="input-label">{{comp.description[0]}}</span>   -->
+<!-- 								</td> -->
+<!-- 								<td> -->
+<!--  									<input type="number" ng-model="comp.quantity"  -->
+<!--  												 ng-minlength="1" -->
+<!--  												 ng-maxlength="4"  -->
+<!--  												 ng-blur="updateControl($index)"  -->
+<!--  												 maxlength="4"  -->
+<!--  												 size="4"  -->
+<!--  												 style="width: 10px"> -->
+<!-- 									</input> -->
+<!-- 								</td> -->
+<!-- 								</tr> -->
+<!-- 								</table>	 -->
+<!-- 								</label> -->
+							</form>               			
+						</div>
+					
+               </div>
+               
+  			</div> 
+  		 
+		</ion-list>
+
+<!-- 	
+		<ion-list class="item-button-right">
+			<ion-item ng-repeat="control in currentPanelData.controls"  class="item" href="#selections/{{control.id}}">
+  				{{control.componentName}}
+				<i class="icon ion-chevron-right"></i>
+  			</ion-item>   
+		</ion-list>
+
+ 
+ <div data-ng-controller="singleSelectController">
+    {{control.displayName}}<br>
+<select class="item-text-wrap" ng-model="updateRequest.ctrl_value_C"
+        data-ng-options="comp.id as comp.description[0] for comp in control.data" ng-change="updateControl()">                
+</select>
+</div>
+
+
+ <div data-ng-controller="singleSelectController">
+               <div ng-repeat="comp in control.data">
+                    <ion-radio class="item-text-wrap" ng-model="updateRequest.ctrl_value_C" value="{{comp.id}}" ng-change="updateControl()">{{comp.description[0]}}</ion-radio>
+                </div>
+</div>
+
+
+
+
+ <div data-ng-controller="multiSelectController">
+        <ion-checkbox class="item-text-wrap"
+        			ng-repeat="comp in control2.data"
+                      ng-model="comp.selected" 
+                      ng-checked="comp.selected"
+                      ng-change="updateControl2()">
+          {{ comp.description[0] }}
+        </ion-checkbox>
+</div>
+
+<div data-ng-controller="stringSelectController">
+<label class="item item-input">
+  <span class="input-label item-text-wrap">{{control.description}}</span>
+ <input type="text" ng-model="updateRequest.ctrl_value_S" ng-minlength="1"
+  ng-maxlength="30"
+  ng-change="updateControl()">
+</input>
+</label>
+</div>
+
+<div data-ng-controller="tableSelectController">
+<div ng-repeat="comp in control.data">
+<label class="item item-input item-text-wrap">
+<span class="input-label">{{comp.description[0]}}</span>  
+ <input type="number" ng-model="comp.quantity" ng-minlength="1"
+  ng-maxlength="4" ng-change="updateControl()" maxlength="4" size="4" style="width: 10px">
+</input>
+</label>
+</div>
+</div>
+
+ -->	
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+ 
+</label>
+		    </ion-content>
+      </ion-view>
+

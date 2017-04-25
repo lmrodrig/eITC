@@ -1,0 +1,194 @@
+<ion-view title="{{header.title()}}">
+
+	<ion-content ng-class="{'has-loading': header.isLoading()}" class="has-footer"
+     
+     ng-init =" 
+     headers ='Global Settings'; 
+     headers2 ='Main Selection';
+     	
+     customizeData = { panels: [{label:'Main Selections'},
+     							{label: 'Pricing Options'},
+     					        {label:'Software Default Options'},
+     					        {label:'Services'},
+     ]};
+
+     messages = [{ severity: 'FAILURE', text: 'Simulating failure error'},
+     			 { severity: 'WARNING', text: 'Simulating warning error'},
+     			 { severity: 'INFO', text: 'Simulating information text'}
+     ];
+
+     panelItems = [{type:'Group', description: 'Geography', visable: true},
+                   {type: 'Label', description: 'USA', visable:true},
+                   {type:'Group', description: 'Country or Region', visable: true},
+                   {type: Control, description: 'United States', visable:true},
+                   {type:'Group', description: 'Customer requested arrival date (CRAD)', visable: true},
+                   {type: 'Label', description: '02/17/2017', visable:true},
+                   {type: Control, description: 'Include withdrawn Products', visable:true},
+                   {type: Control, description: 'Show SWMA MTM with its licence MTM in the \'proposed\' Report', visable:true},
+                   {type: Control, description: 'Allow Standalone peripherals', visable:true},
+                   {type: Control, description: 'Special Operations Process', visable:true},
+                   {type:'Group', description: 'ExpressSeller', visable: true},
+                   {type: Control, description: 'None', visable:true},
+                   {type: Control, description: 'Special access code', visable:true}
+     ];
+
+     
+     
+	">
+ 	<h4>{{headers}} - {{headers2}}</h4>
+    <div class="ab-nav paneltabs""> 
+	    <div class="inline" ng-repeat="panel in customizeData.panels"> 
+	      <button ng-disabled="$index == currentPanelIndex" ng-click="selectPanel($index)" ng-bind="panel.label" class="button button-clear button-positive">{{"panel.label"}}</button> 
+		</div> 
+  	</div> 
+<!--
+	<div ng-repeat="message in messages">
+			<div ng-if="message.severity == 'FATAL' || message.severity == 'FAILURE'" class="alert alert-success" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/1.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+			</div>
+		  	<div ng-if="message.severity == 'WARNING'" class="alert alert-warning" role="alert" style="padding:5px;margin-bottom:5px;">
+		  		<img ng-src="images/2.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+		  	</div>
+			<div ng-if="message.severity == 'INFO'" class="alert alert-info" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/3.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+			</div>
+	</div>
+-->
+	<ion-list class="item-button-right">
+		<ion-item  class="item item-divider item-group item-text-wrap">
+  				Geography
+		</ion-item>
+		
+			  <ion-select class = "item item-input item-select">
+			  		
+    				<ion-option value="us" selected="true">USA</ion-option>
+    				
+
+  			</ion-select>
+  				
+  		<ion-item  class="item item-divider item-group item-text-wrap">
+  				Country or Region
+		</ion-item>
+		<!--ion-item  class="item item-divider item-seperator item-text-wrap"-->
+		<ion-radio class="item item-radio"  value="us" name="region">United states
+		<i class="radio-icon ion-checkmark"></i>
+		</ion-radio>
+
+  				
+  		<!--/ion-item-->
+
+  		<ion-item  class="item item-divider item-group item-text-wrap">
+  				Customer requested arrival date (CRAD)
+		</ion-item>
+		<ion-item  class="item item-divider item-seperator item-text-wrap">
+  				11/21/2017
+  		</ion-item>
+  		<!--ion-item  class="item item-divider item-seperator item-text-wrap"-->
+  				<ion-toggle class="item item-stable item-text-wrap toggle-calm">
+        			 Include withdrawn Products
+         			<label class="toggle  toggle-light">
+             			<input type="checkbox">
+             			<div class="track">
+                 			<div class="handle"></div>
+             			</div>
+         				</label>
+     			</ion-toggle>
+  		<!--/ion-item-->
+  		<ion-toggle class="item item-stable item-text-wrap toggle-calm">
+        			 Show SWMA MTM with its licence MTM in the 'proposed' Report
+         			<label class="toggle  toggle-light">
+             			<input type="checkbox">
+             			<div class="track">
+                 			<div class="handle"></div>
+             			</div>
+         				</label>
+     	</ion-toggle>
+     	<ion-toggle class="item item-stable item-text-wrap toggle-calm">
+        			 Allow Standalone peripherals
+         			<label class="toggle  toggle-light">
+             			<input type="checkbox">
+             			<div class="track">
+                 			<div class="handle"></div>
+             			</div>
+         				</label>
+     	</ion-toggle>
+     	<ion-toggle class="item item-stable item-text-wrap toggle-calm">
+        			 Special Operations Process
+         			<label class="toggle  toggle-light">
+             			<input type="checkbox">
+             			<div class="track">
+                 			<div class="handle"></div>
+             			</div>
+         				</label>
+     	</ion-toggle>
+	</ion-list>
+
+
+	<ion-list class="item-button-right">
+		<div ng-repeat="item in wizardItems">
+			<ion-item ng-if="item.type == 'Group'" class="item item-divider item-group item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+			<ion-item ng-if="item.type == 'Label' && item.visable" class="item item-divider item-seperator item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+		 	<div ng-if="item.type == 'Control' && item.visable">
+		 		<div ng-include src="'views/controls.html'"></div>
+		 	</div>
+		</div>
+	</ion-list>
+
+<!--  -->
+
+ <!--
+		<h4>{{customizeData.description}} - {{currentPanelData.label}}</h4>
+  
+		<div class="ab-nav paneltabs""> 
+		    <div class="inline" ng-repeat="panel in customizeData.panels"> 
+		      <button ng-disabled="$index == currentPanelIndex" ng-click="selectPanel($index)" ng-bind="panel.label" class="button button-clear button-positive">{{"panel.label"}}</button> 
+		    </div> 
+  		</div> 
+
+		<div ng-repeat="message in messages()">
+			<div ng-if="message.severity == 'FATAL' || message.severity == 'FAILURE'" class="alert alert-success" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/1.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+			</div>
+		  	<div ng-if="message.severity == 'WARNING'" class="alert alert-warning" role="alert" style="padding:5px;margin-bottom:5px;">
+		  		<img ng-src="images/2.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+		  	</div>
+			<div ng-if="message.severity == 'INFO'" class="alert alert-info" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/3.ico" alt="" height="15" width="15">&nbsp;{{message.text}}
+			</div>
+		</div>
+	
+	<ion-list class="item-button-right">
+		<div ng-repeat="item in panelItems">
+			<ion-item ng-if="item.type == 'Group' && item.description.length > 0" class="item item-divider item-group item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+			<ion-item ng-if="item.type == 'Label' && item.visable && item.description.length > 0" class="item item-divider item-seperator item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+		 	<div ng-if="item.type == 'Control' && item.visable" ng-include src="'views/controls.html'"></div>
+		</div>
+	</ion-list>
+	<ion-list class="item-button-right">
+		<div ng-repeat="item in wizardItems">
+			<ion-item ng-if="item.type == 'Group'" class="item item-divider item-group item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+			<ion-item ng-if="item.type == 'Label' && item.visable" class="item item-divider item-seperator item-text-wrap">
+  				{{item.description}}
+			</ion-item>
+		 	<div ng-if="item.type == 'Control' && item.visable">
+		 		<div ng-include src="'views/controls.html'"></div>
+		 	</div>
+		</div>
+	</ion-list> -->
+	</ion-content>		    
+</ion-view>
+      
+ 
+      
+
+

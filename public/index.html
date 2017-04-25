@@ -1,26 +1,61 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <title>NodeJS Starter Application</title>
+<html ng-app="App">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    
+    <title>e-config POC</title>
+       
+    
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/angular/angular-route.js"></script>
+    <script src="lib/angular/angular-tree-control.js"></script>
+    <script src="lib/angular/svg-pan-zoom.js"></script>
+    <script src="lib/angular/jquery.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/tree-control-attribute.css" rel="stylesheet">
+    <link href="css/tree-control.css" rel="stylesheet"> 
+    <script type="text/javascript">
+
+
+      function HandleBrowseClick()
+      {
+          var fileinput = document.getElementById("browse");
+          fileinput.click();
+      }
+  
+      function Handlechange()
+      {
+        var fileinput = document.getElementById("browse");
+        var fileinputValue = fileinput.value.replace("C:\\fakepath\\", "")
+        var textinput = document.getElementById("filename");
+        textinput.value = fileinputValue;
+      }
+    </script>
+
+         
   </head>
+  <body ng-controller="MenuController">
+    <ion-nav-view></ion-nav-view>
 
-  <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1 id="message">Hello World!</h1>
-          <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-        </td>
-      </tr>
-    </table>
+  <script src="js/app.js"></script>
+  <script src="js/constants/backendConstants.js"></script>
+  <script src="js/services/productBasesServices.js"></script>
+  <script src="js/services/traceServices.js"></script>
+  <script src="js/services/sessionServices.js"></script>
+  <script src="js/services/resultsServices.js"></script>
+  <script src="js/services/updateControlServices.js"></script>
+  <script src="js/services/menuServices.js"></script>
+  <script src="js/services/utilServices.js"></script>
+  <script src="js/controllers/productBasesController.js"></script>
+  <script src="js/controllers/traceController.js"></script>
+  <script src="js/controllers/sessionController.js"></script>
+  <script src="js/controllers/resultsController.js"></script>
+  <script src="js/controllers/customizeController.js"></script>
+  <script src="js/controllers/selectionController.js"></script>
+  <script src="js/controllers/menu.js"></script>
+  <script src="js/messages.js"></script>
+  <script type="text/javascript">
+
   </body>
-
 </html>

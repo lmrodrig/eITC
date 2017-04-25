@@ -1,0 +1,29 @@
+<ion-view title="{{header.title()}}">
+
+ <ion-content ng-class="{'has-loading': header.isLoading}" padding="true">
+   	<div>{{errorMsg}}</div>
+Select CFR file to import
+<br><br>
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+		<ng-form ng-controller="importCFRController">
+		   <!-- <input type="file" data-buttonText="Your label here." name="Select file to restore" value="Select file to restore" file-model="fileToUpload" ng-disabled="uploading">
+			 <div class="file_button_container" ><input type="file" file-model="fileToUpload" ng-disabled="uploading"></div> -->
+				<div class="inline">					
+			 			<input type="text" id="filename" readonly="true" size="45" style="padding-top: 0px;display: inline-block"/>
+			 			<input file-model="fileToUpload" type="file" id="browse" name="fileupload"  style="display: none" onChange="Handlechange();"/>			 		
+			 	</div>
+			 	<div class="inline">
+			 		<button class="button button-positive" type="button"  ng-disabled="uploading" onclick="HandleBrowseClick();" style="min-height:34px; line-height:0px;vertical-align:middle">Browse</button></td>
+			 	</div>
+			 	<div>
+			 			<button class="button button-positive" type="button" ng-click="uploadFile()" ng-disabled="uploading" style="min-height:34px; line-height:0px;vertical-align:middle">
+				        	<span ng-show="!uploading">Import</span>
+				        	<span ng-show="uploading">Importing...</span>
+			        	</button>
+			 	</div>
+			 		    <span ng-show="flash.length">{{ flash }}</span>
+		</ng-form>
+        </ion-content>
+      </ion-view>

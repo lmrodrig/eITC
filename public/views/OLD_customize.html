@@ -1,0 +1,129 @@
+ <!--    <ion-tabs class="tabs-icon-top tabs-secondary">
+        <ion-tab title="Edit" icon="ion-home">
+         -->           
+        <ion-view>
+        <ion-content class="padding" ng-class="{'has-loading': header.isLoading}" >
+		<h4>{{customizeData.componentName}}</h4>
+		<div ng-repeat="message in messages()">
+			<div ng-if="message.severity == 'FATAL' || message.severity == 'FAILURE'" class="alert alert-success" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/1.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+			</div>
+		  	<div ng-if="message.severity == 'WARNING'" class="alert alert-warning" role="alert" style="padding:5px;margin-bottom:5px;">
+		  		<img ng-src="images/2.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+		  	</div>
+			<div ng-if="message.severity == 'INFO'" class="alert alert-info" role="alert" style="padding:5px;margin-bottom:5px;">
+				<img ng-src="images/3.ico" alt="" height="15" width="15">&nbsp;{{message.description}}
+			</div>
+		</div>
+
+  		<!--  
+         <ion-scroll direction="x">
+             <div ng-repeat="control in customizeData.flowControls" href="#/config/selectFlowControl/{{control.type}}" style="display: inline-block; margin: 10px;">
+               {{control.type}}
+              <br>
+              </div>
+            <div ng-repeat="control in customizeData.controls" href="#/config/selectFlowControl/{{control.type}}" style="display: inline-block; margin: 10px;">
+               {{control.displayName}}
+              <br>
+               </div>
+          </ion-scroll>
+          -->
+          <!--
+         <ion-scroll direction="x">
+           
+            <ion-item class="item" ng-repeat="panel in customizeData.panels" href="#/config/selectPanel/{{panel.id}}" style="display: inline-block; margin: 10px;{{$index == currentPanelIndex ? 'font-weight:bold;' : ''}}">
+               {{panel.label}}
+              <br>
+            </ion-item>
+           
+             <a class="button button-clear button-dark" ng-repeat="panel in customizeData.panels" ng-href="#/config/selectPanel/{{panel.id}}" style="display: inline-block; margin: 10px;{{$index == currentPanelIndex ? 'font-weight:bold;' : ''}}">
+               {{panel.label}}
+              <br>
+            </a>
+           
+          </ion-scroll>
+
+ 
+  		<ion-list class="item-button-right">
+			<ion-item ng-repeat="control in currentPanelData.controls"  class="item">
+  				{{control.type}}
+  				{{control.displayName}}
+  			</ion-item>   
+  			
+		</ion-list>
+		 	<ion-list class="item-button-right">
+			<ion-item ng-repeat="control in currentPanelData.flowControls"  class="item">
+  				{{control.type}}
+  				{{control.displayName}}
+  			</ion-item>   
+		</ion-list>
+		
+		-->
+		
+			<div class="ab-nav breadcrumb">
+		<div class='inline' ng-repeat="control in customizeData.flowControls">
+			<a ng-href="#" ng-click="selectFlowControl($index)" ng-bind="control.displayName" class="margin-right-xs"></a>
+		</div>
+	</div>
+		
+			<div class="ab-nav breadcrumb">
+		<div class='inline' ng-repeat="control in customizeData.controls">
+			<a ng-href="#" ng-click="selectControl($index)" ng-bind="control.displayName" class="margin-right-xs"></a>
+		</div>
+	</div>
+		
+<ion-list class="item-button-right">
+	<ion-item ng-repeat="panel in customizeData.panels" class="item item-icon-right" href="#/config/panel/{{panel.id}}" style="{{$index == currentPanelIndex ? 'font-weight:bold;' : ''}}">
+  		{{panel.label}}
+	 	<i class="icon ion-chevron-right icon-accessory"></i>
+	 	<!-- 
+	 	<i ng-show="$index != currentPanelIndex" class="icon ion-chevron-right icon-accessory"></i>
+	 	<ion-list ng-show="$index == currentPanelIndex" class="item-button-right">
+			<ion-item ng-repeat="control in currentPanelData.controls"  class="item item-icon-right" style="font-weight:normal">
+  				{{control.displayName}}
+ 	 			<i class="icon ion-chevron-right icon-accessory"></i>
+  			</ion-item>   
+  			 -->
+	 	</ion-item>   
+</ion-list>            
+		
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+ 
+</label>
+		    </ion-content>
+      </ion-view>
+ <!--
+<ion-list class="item-button-right">
+	<ion-item ng-repeat="control in customizeData.controls"  class="item">
+  		{{control.type}}
+  		{{control.displayName}}
+  		</ion-item>   
+</ion-list>
+ -->
+<!--
+<ion-list class="item-button-right">
+	<ion-item ng-repeat="control in customizeData.flowControls" href="#selectFlowControl/{{control.type}}" class="item">
+  		{{control.type}}
+  		{{control.displayName}}
+  		</ion-item>   
+</ion-list>
+
+     </ion-content>
+      </ion-view>
+        </ion-tab>
+
+ 
+        <ion-tab title="Configure" icon="ion-home">
+          <ion-view title="Configure">
+        <ion-content class="padding">
+       <h3>Configure</h3>
+        </ion-content>
+      </ion-view>
+        </ion-tab>
+
+ 
+      </ion-tabs>
+ -->
+

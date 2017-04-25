@@ -1,0 +1,216 @@
+/* Empty. Add your own CSS if you like */
+
+
+html, body {
+    height: 100%;
+}
+
+.poc-table-input-label {
+  display: table;
+  padding: 7px 10px 7px 0px;
+  max-width: 600px;
+  width: 90%;
+  color: #444;
+  font-size: 16px; }
+ 
+ 
+ .bar.bar-loading {
+  display: block;
+  height: 24px;
+  
+  /* starts right below a normal header */
+  top: 44px;
+  
+  /* make the text centered vertically and horizontally */
+  text-align: center;
+  padding: 0;
+  line-height: 24px;
+
+  /* transition 'sliding down' (check below)*/
+  -webkit-transition: 200ms all;
+}
+
+
+/* 
+ * make the content's top changes animate.
+ * might not always look good, but looks
+ * good when our loader is added & removed
+ */
+.has-header {
+  -webkit-transition: 200ms top;
+}
+.has-header.has-loading {
+  /* 44px (header) + 24px */
+  top: 68px;
+}
+
+/* make loading bar slide up/down */
+.bar-loading.ng-enter,
+.bar-loading.ng-leave.ng-leave-active {
+  height: 0;
+  border-width: 0px;
+}
+.bar-loading.ng-enter.ng-enter-active,
+.bar-loading.ng-leave {
+  height: 24px;
+  border-width: 1px;
+}
+
+.ab-nav.breadcrumb {
+	margin-bottom: 30px;
+}
+
+.margin-right-xs {
+	margin-right: 7px;
+}
+
+.inline {
+	display: inline-block;
+	margin: 2px;
+}
+
+.breadcrumb {
+	/*padding: 4px 5px;*/
+	margin-bottom: 10px;
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+
+.ab-nav.paneltabs {
+	margin-bottom: 2px;
+}
+
+.paneltabs {
+	margin-bottom: 10px;
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+
+.item {
+	font-size:14px !important;
+}
+
+.item.item-divider.item-seperator {
+    border-color: #b2b2b2;
+    background-color: #edf4fa;
+    color: #444;}
+    
+.item.item-divider.item-group {
+    border-color: #b2b2b2;
+    background-color: #d7e8f4;
+    color: #444;
+    min-height: 25px; }
+    
+.action {
+	padding: 6px !important;
+    border: none !important;
+    height: 20px !important;
+   	margin-top: 6px !important;
+   	margin-bottom: 6px !important;
+    color: #387ef5 !important;
+}
+
+i.poc-close.ion-loading-c {
+  font-size: 90px;
+}
+    
+.file_button_container,
+  .file_button_container input {
+       height: 47px;
+       width: 263px;
+   }
+
+   .file_button_container {
+       background: transparent url(http://i.stack.imgur.com/BT5AB.png) left top no-repeat;
+   }
+
+   .file_button_container input {
+       opacity: 0;
+   }
+   
+   
+#disablingDiv
+{
+    /* Display it on the layer with index 1001.
+       Make sure this is the highest z-index value
+       used by layers on that page */
+    z-index:1001;
+     
+    /* make it cover the whole screen */
+    position: absolute; 
+    top: 0%; 
+    left: 0%; 
+    width: 100%; 
+    height: 100%; 
+ 
+    /* make it white but fully transparent */
+    background-color: white; 
+    opacity:.25; 
+    filter: alpha(opacity=00); 
+}
+
+overlay-select .list {
+  margin: -1px 0; }
+
+.overlay-select-items {
+    position: absolute; 
+    top: 2%; 
+    left: 2%; 
+  	width: 96%;
+  	height: 96%; }
+  .overlay-select-items .item {
+    overflow: hidden;
+    /* Clearfix */ }
+
+.overlay-select-items label p {
+  height: 32px;
+  line-height: 32px; }
+
+.overlay-select-icon {
+  float: left;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center; }
+  
+.bar.poc {
+    border-color: #b2b2b2 !important;
+    background-color: #d7e8f4 !important;
+    color: #444 !important;
+}  
+
+input[type=number]{
+    font-size:1em;
+    width:5em;
+    padding:3px;
+    margin:0;
+    border-radius:3px; 
+    border: 1px solid #e1e1e1;
+    //color: #e1e1e1
+    text-align:right;
+}
+
+table {
+    width: 100%;
+    border-spacing: 2px;
+    border-color: grey;
+    line-height: 2.5;
+}
+
+th {
+    background-color:#ececec;
+}
+tr {
+    vertical-align: middle;
+    border-top: solid 1px grey;
+    display: table-row;
+    vertical-align: middle;
+ 	border-color: #e1e1e1;
+}
+
+.selected {
+    background-color: #000000;
+    color: white;
+}
+

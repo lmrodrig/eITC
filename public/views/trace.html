@@ -1,0 +1,35 @@
+<ion-view title="{{header.title()}}">
+ <ion-content padding="true" ng-class="{'has-loading': header.isLoading}">
+
+	<h4>Trace Options</h4>
+	 <div>{{errorMsg}}</div>
+ 		<button class="button button-icon ion-arrow-left-c" ng-click="goBack()">Back</button>
+ 
+       <div class="list">
+        
+        <div class="item item-divider"> 
+          Trace types to enable
+        </div>
+        
+        <ion-toggle ng-repeat="s in status"
+                    ng-model="s.traceEnabled" 
+                    ng-checked="s.traceEnabled"
+                    ng-change="statusChange($index)">
+          {{s.traceType}}   (Enabled: {{s.traceEnabled}})
+        </ion-toggle>
+    </div>
+    
+       <div class="list">
+        <div class="item item-divider"> 
+        	<a class="button button-clear button-dark icon-right ion-chevron-right" ng-click="getTraceFile()" ng-disabled="downloadIsDisabled">
+  				Download
+			</a>
+        </div>
+      </div>
+      
+<div ng-show="header.showJSON()">
+<br><br>JSON<br><textarea rows="200" cols="100">{{json}}</textarea>
+</div>
+       </ion-content>
+      </ion-view>
+         
